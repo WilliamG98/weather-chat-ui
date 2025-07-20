@@ -48,8 +48,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-gray-100 flex flex-col items-center justify-center">
-      <div className="w-full max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-2xl rounded-b-2xl mx-auto">
+    <div className="h-[100dvh] bg-gray-100 flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-full max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-2xl rounded-b-2xl mx-auto flex flex-col h-full">
         <div className="flex items-center justify-center relative">
           <div className="text-lg sm:text-xl md:text-2xl font-bold text-center py-3 sm:py-4 border-b border-gray-200 bg-blue-500 text-white rounded-t-2xl w-full">
             Weather Chat
@@ -70,7 +70,7 @@ function App() {
         </div>
         {user && (
           <>
-            <div className="flex-1 flex flex-col gap-2 sm:gap-4 p-2 sm:p-4 h-[60vh] sm:h-[28rem] overflow-y-auto">
+            <div className="flex-1 flex flex-col gap-2 sm:gap-4 p-2 sm:p-4 overflow-y-auto">
               {messages.length === 0 && (
                 <div className="text-gray-400 text-center">No messages yet. Start the conversation!</div>
               )}
