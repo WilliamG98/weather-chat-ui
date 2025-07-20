@@ -91,25 +91,27 @@ function App() {
               )}
               <div ref={messagesEndRef} />
             </div>
-            <form className="flex gap-2 sm:gap-3 p-2 sm:p-4 border-t border-gray-200" onSubmit={handleSend}>
-              <input
-                type="text"
-                className="flex-1 px-3 py-3 sm:px-3 sm:py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg"
-                placeholder="Type your message..."
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                autoFocus
-                disabled={loading}
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-3 sm:px-5 sm:py-2 rounded hover:bg-blue-600 text-base sm:text-lg disabled:opacity-50"
-                disabled={!input.trim() || loading}
-              >
-                Send
-              </button>
-            </form>
-            <div className="w-full h-6 bg-blue-500 rounded-b-2xl" />
+            <div className="pb-[env(safe-area-inset-bottom)] w-full">
+              <form className="flex gap-2 sm:gap-3 p-2 sm:p-4 border-t border-gray-200" onSubmit={handleSend}>
+                <input
+                  type="text"
+                  className="flex-1 px-3 py-3 sm:px-3 sm:py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg"
+                  placeholder="Type your message..."
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  autoFocus
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-3 sm:px-5 sm:py-2 rounded hover:bg-blue-600 text-base sm:text-lg disabled:opacity-50"
+                  disabled={!input.trim() || loading}
+                >
+                  Send
+                </button>
+              </form>
+              <div className="w-full h-6 bg-blue-500 rounded-b-2xl" />
+            </div>
           </>
         )}
       </div>
