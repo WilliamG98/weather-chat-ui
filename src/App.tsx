@@ -6,14 +6,7 @@ function App() {
   const [input, setInput] = useState('');
   const [user, setUser] = useState<{ credential: string } | null>(null);
   const [loading, setLoading] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => setViewportHeight(window.innerHeight);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -55,7 +48,7 @@ function App() {
   };
 
   return (
-    <div style={{ height: viewportHeight }} className="bg-gray-100 flex flex-col items-center justify-center overflow-hidden">
+    <div className="h-screen bg-gray-100 flex flex-col items-center justify-center overflow-hidden touch-none">
       <div className="w-full max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-2xl rounded-b-2xl mx-auto flex flex-col h-full">
         <div className="flex items-center justify-center relative">
           <div className="text-lg sm:text-xl md:text-2xl font-bold text-center py-3 sm:py-4 border-b border-gray-200 bg-blue-500 text-white rounded-t-2xl w-full">
