@@ -109,6 +109,7 @@ function App() {
                 Send
               </button>
             </form>
+            <div className="w-full h-6 bg-blue-500 rounded-b-2xl" />
           </>
         )}
       </div>
