@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <div className="min-h-[100dvh] bg-gray-100 flex flex-col items-center justify-center">
       <div className="w-full max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-2xl rounded-b-2xl mx-auto">
         <div className="flex items-center justify-center relative">
           <div className="text-lg sm:text-xl md:text-2xl font-bold text-center py-3 sm:py-4 border-b border-gray-200 bg-blue-500 text-white rounded-t-2xl w-full">
