@@ -23,7 +23,7 @@ function App() {
     }
   };
 
-  const backendUrl ='http://localhost:5000';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
