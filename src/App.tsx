@@ -23,7 +23,7 @@ function App() {
     }
   };
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  const backendUrl ='http://localhost:5000';
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +32,21 @@ function App() {
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setLoading(true);
+    
+    // Send conversation history with the request
+    const conversationHistory = messages.map(msg => ({
+      sender: msg.sender,
+      text: msg.text
+    }));
+    
     try {
       const res = await fetch(`${backendUrl}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({ 
+          message: input,
+          history: conversationHistory 
+        })
       });
       const data = await res.json();
       setMessages(prev => [...prev, { sender: 'bot' as const, text: data.response }]);
