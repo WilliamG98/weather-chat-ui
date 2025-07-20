@@ -7,10 +7,21 @@ function App() {
   const [user, setUser] = useState<{ credential: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Scroll to bottom when input is focused (on mobile)
+  const handleInputFocus = () => {
+    // Only scroll on mobile devices
+    if (window.innerWidth <= 640) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100); // slight delay to allow keyboard to open
+    }
+  };
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
@@ -94,6 +105,7 @@ function App() {
             <div className="pb-[env(safe-area-inset-bottom)] w-full">
               <form className="flex gap-2 sm:gap-3 p-2 sm:p-4 border-t border-gray-200" onSubmit={handleSend}>
                 <input
+                  ref={inputRef}
                   type="text"
                   className="flex-1 px-3 py-3 sm:px-3 sm:py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg"
                   placeholder="Type your message..."
@@ -101,6 +113,7 @@ function App() {
                   onChange={e => setInput(e.target.value)}
                   autoFocus
                   disabled={loading}
+                  onFocus={handleInputFocus}
                 />
                 <button
                   type="submit"
