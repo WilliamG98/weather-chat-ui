@@ -6,12 +6,27 @@ function App() {
   const [input, setInput] = useState('');
   const [user, setUser] = useState<{ credential: string } | null>(null);
   const [loading, setLoading] = useState(false);
+  const [userIp, setUserIp] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Get user's IP address when component mounts
+  useEffect(() => {
+    const getUserIp = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        setUserIp(data.ip);
+      } catch (error) {
+        console.error('Failed to get IP address:', error);
+      }
+    };
+    getUserIp();
+  }, []);
 
   // Scroll to bottom when input is focused (on mobile)
   const handleInputFocus = () => {
@@ -23,7 +38,8 @@ function App() {
     }
   };
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  //const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = 'http://localhost:5000'; //testing purposes
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +61,8 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: input,
-          history: conversationHistory 
+          history: conversationHistory,
+          user_ip: userIp
         })
       });
       const data = await res.json();
